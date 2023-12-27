@@ -1,0 +1,22 @@
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee webapp_4_0.xsd"
+         version="4.0">
+  <servlet>
+    <servlet-name>hello-world</servlet-name>
+    <servlet-class>org.bezrukov.servlets.RestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>hello-world</servlet-name>
+    <url-pattern>/hello</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>HomeJSP</servlet-name>
+    <jsp-file>/home.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HomeJSP</servlet-name>
+    <url-pattern>/home</url-pattern>
+  </servlet-mapping>
+
+</web-app>

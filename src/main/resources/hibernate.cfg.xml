@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE hibernate-configuration SYSTEM "http://hibernate.org/dtd/hibernate-configuration-3.0.dtd" >
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.dialect">
+            org.hibernate.dialect.PostgreSQLDialect
+        </property>
+        <property name="hibernate.connection.driver_class">
+            org.postgresql.Driver
+        </property>
+        <property name="hibernate.connection.url">
+            jdbc:postgresql://localhost:5432/postgres?currentSchema=public
+        </property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">123</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.hbm2ddl.auto">validate</property>
+        <property name="hibernate.default_schema">public</property>
+        <property name="hibernate.jdbc.batch_size">100</property>
+        <property name="hibernate.cache.region.factory_class">jcache</property>
+        <property name="hibernate.cache.use_second_level_cache">true</property>
+        <property name="hibernate.javax.cache.uri">/application.conf</property>
+        <property name="hibernate.javax.cache.provider">com.github.benmanes.caffeine.jcache.spi.CaffeineCachingProvider</property>
+        <property name="hibernate.cache.use_query_cache">true</property>
+
+        <mapping class="org.bezrukov.entity.Author"></mapping>
+        <mapping class="org.bezrukov.entity.Book"></mapping>
+        <mapping class="org.bezrukov.entity.EBook"></mapping>
+        <mapping class="org.bezrukov.entity.PaperBook"></mapping>
+    </session-factory>
+</hibernate-configuration>
