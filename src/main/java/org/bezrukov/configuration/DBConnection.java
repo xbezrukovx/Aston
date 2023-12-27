@@ -1,26 +1,28 @@
 package org.bezrukov.configuration;
 
-import java.sql.*;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-public class DBConnection{
-    private static final String url = "jdbc:postgresql://localhost:5432/postgres";
-    private static final String user = "postgres";
-    private static final String pass = "123";
-    private static Connection connection = null;
+public class DBConnection {
+    private static Boolean isInit = false;
+    private static SessionFactory sessionFactory;
 
-    public static Connection getConnection() {
-        if (connection == null) {
-            connection = createConnection();
+    public static Session getSession() {
+        if (!isInit) {
+            sessionFactory = createSessionFactory();
+            isInit = true;
         }
-        return connection;
+        return sessionFactory.openSession();
     }
 
-    private static Connection createConnection() {
-        try {
-            Class.forName("org.postgresql.Driver");
-            return DriverManager.getConnection(url, user, pass);
-        } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+    private static SessionFactory createSessionFactory() {
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+                .configure("hibernate.cfg.xml").build();
+        Metadata metadata = new MetadataSources(registry).getMetadataBuilder().build();
+        return metadata.getSessionFactoryBuilder().build();
     }
 }
